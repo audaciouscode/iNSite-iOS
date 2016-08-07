@@ -6,9 +6,21 @@
 //  Copyright © 2016 iNSite AEC Hackathon Team. All rights reserved.
 //
 
+@import CoreLocation;
+
+#import "AFHTTPSessionManager.h"
+#import "AFNetworkReachabilityManager.h"
+#import "MMDrawerController.h"
+
 #import "AppDelegate.h"
 
+#import "ISMainViewController.h"
+#import "ISSiteInfoViewController.h"
+#import "ISMapFilterViewController.h"
+
 @interface AppDelegate ()
+
+@property AFNetworkReachabilityManager * reach;
 
 @end
 
@@ -16,9 +28,119 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    [self setupRootController];
+
+    NSMutableDictionary * options = [NSMutableDictionary dictionary];
+    [options setValue:NSLocalizedString(@"rationale_location_capabilities", nil) forKey:PDKCapabilityRationale];
+    [options setValue:@NO forKey:PDKLocationSignificantChangesOnly];
+    [options setValue:@YES forKey:PDKLocationAlwaysOn];
+    
+    [[PassiveDataKit sharedInstance] registerListener:self forGenerator:PDKLocation options:options];
+    
+    [self refreshSites];
+    
     return YES;
 }
+
+- (void) refreshSites {
+    self.reach = [AFNetworkReachabilityManager managerForDomain:@"insite.audacious-software.com"];
+    
+    __unsafe_unretained AppDelegate * weakSelf = self;
+    
+    [self.reach setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status){
+        if (status == AFNetworkReachabilityStatusReachableViaWWAN || status == AFNetworkReachabilityStatusReachableViaWiFi)
+        {
+            NSURL * jsonUrl = [NSURL URLWithString:[NSBundle mainBundle].infoDictionary[@"iNSite Sites URL"]];
+            
+            AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+            
+            manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+            
+            [manager GET:jsonUrl.absoluteString parameters:nil progress:nil success:^(NSURLSessionTask *task, id responseObject) {
+                NSError * error = nil;
+                NSArray * sites = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:&error];
+                
+                [[NSUserDefaults standardUserDefaults] setValue:sites forKey:@"ISSitesList"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"sites_updated" object:nil];
+            } failure:^(NSURLSessionTask *operation, NSError *error) {
+                NSLog(@"ERROR: %@", error);
+            }];
+        }
+        
+        [weakSelf.reach stopMonitoring];
+        weakSelf.reach = nil;
+    }];
+    
+    [self.reach startMonitoring];
+}
+
+
+- (void) receivedData:(NSDictionary *) data forGenerator:(PDKDataGenerator) dataGenerator {
+    switch(dataGenerator) {
+        case PDKLocation:
+            [self setLastKnownLocation:[data valueForKey:PDKLocationInstance]];
+            
+            break;
+        default:
+            break;
+    }
+}
+
+- (void) setLastKnownLocation:(CLLocation *) location {
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    
+    [defaults setDouble:location.coordinate.latitude forKey:@"last_known_latitude"];
+    [defaults setDouble:location.coordinate.longitude forKey:@"last_known_longitude"];
+    
+    [defaults synchronize];
+}
+
+- (CLLocation *) lastKnownLocation {
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([defaults valueForKey:@"last_known_latitude"] != nil) {
+        CLLocationDegrees latitude = [defaults doubleForKey:@"last_known_latitude"];
+        CLLocationDegrees longitude = [defaults doubleForKey:@"last_known_longitude"];
+        
+        return [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+    }
+    
+    return nil;
+}
+
+- (void) setupRootController {
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    ISMainViewController * mainController = [[ISMainViewController alloc] init];
+    
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:mainController];
+    navController.navigationBar.barStyle = UIBarStyleBlack;
+    navController.navigationBar.barTintColor = [UIColor colorWithRed:(0xff/255.0) green:(0x8f/255.0) blue:(0x00/255.0) alpha:1.0];
+    navController.navigationBar.tintColor = [UIColor whiteColor];
+    navController.navigationBar.translucent = NO;
+    navController.navigationBar.titleTextAttributes = @{ NSForegroundColorAttributeName: [UIColor whiteColor] };
+    
+    CALayer * navLayer = navController.navigationBar.layer;
+    navLayer.masksToBounds = NO;
+    navLayer.shadowOffset = CGSizeMake(0.0, 0.0);
+    navLayer.shadowRadius = 2.0;
+    navLayer.shadowOpacity = 0.5;
+    
+    ISSiteInfoViewController * siteInfo = [[ISSiteInfoViewController alloc] init];
+    ISMapFilterViewController * mapFilter = [[ISMapFilterViewController alloc] init];
+    
+    MMDrawerController * drawerController = [[MMDrawerController alloc] initWithCenterViewController:navController
+                                                                            leftDrawerViewController:mapFilter
+                                                                           rightDrawerViewController:siteInfo];
+    self.window.rootViewController = drawerController;
+    
+    [self.window makeKeyAndVisible];
+    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

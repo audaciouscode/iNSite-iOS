@@ -1,0 +1,3 @@
+[submodule "iNSite/Third Party/PassiveDataKit-iOS"]
+	path = iNSite/Third Party/PassiveDataKit-iOS
+	url = git@github.com:audaciouscode/PassiveDataKit-iOS.git

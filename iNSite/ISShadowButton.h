@@ -1,15 +1,13 @@
 //
-//  ViewController.h
+//  ISShadowButton.h
 //  iNSite
 //
 //  Created by Chris Karr on 8/6/16.
 //  Copyright © 2016 iNSite AEC Hackathon Team. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
-@interface ViewController : UIViewController
-
+@interface ISShadowButton : UIButton
 
 @end
-

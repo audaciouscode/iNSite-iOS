@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Name</key>
+		<string>Emergency</string>
+		<key>Icon Name</key>
+		<string>ic_pin_alert</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Traffic</string>
+		<key>Icon Name</key>
+		<string>ic_pin_cone</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Materials</string>
+		<key>Icon Name</key>
+		<string>ic_pin_lumber</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>General Information</string>
+		<key>Icon Name</key>
+		<string>ic_pin_info</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Waste</string>
+		<key>Icon Name</key>
+		<string>ic_pin_info</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Equipment</string>
+		<key>Icon Name</key>
+		<string>ic_pin_info</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Plumbing</string>
+		<key>Icon Name</key>
+		<string>ic_pin_info</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Electrical</string>
+		<key>Icon Name</key>
+		<string>ic_pin_info</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Mechanical</string>
+		<key>Icon Name</key>
+		<string>ic_pin_info</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Superintendent</string>
+		<key>Icon Name</key>
+		<string>ic_pin_info</string>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Safety</string>
+		<key>Icon Name</key>
+		<string>ic_pin_cone</string>
+	</dict>
+</array>
+</plist>

@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "F9311316F99ACF41BA6B7A11F07F5462E11F81CB",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "F9311316F99ACF41BA6B7A11F07F5462E11F81CB" : 0,
+    "B052A25AB30B1A3073D0F770A1088E72D01AFE2F" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "0D56E07A-1518-4A88-88C5-4EACDDD387BE",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "F9311316F99ACF41BA6B7A11F07F5462E11F81CB" : "iNSite\/",
+    "B052A25AB30B1A3073D0F770A1088E72D01AFE2F" : "iNSite\/iNSite\/Third%20Party\/PassiveDataKit-iOS\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "iNSite",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "iNSite.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:audaciouscode\/PassiveDataKit-iOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B052A25AB30B1A3073D0F770A1088E72D01AFE2F"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:audaciouscode\/iNSite-iOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F9311316F99ACF41BA6B7A11F07F5462E11F81CB"
+    }
+  ]
+}

@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+#import <PassiveDataKit/PassiveDataKit.h>
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate, PDKDataListener>
 
 @property (strong, nonatomic) UIWindow *window;
 
@@ -19,7 +21,7 @@
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
-
+- (void) refreshSites;
 
 @end
 

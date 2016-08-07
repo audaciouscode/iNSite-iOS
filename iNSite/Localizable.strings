@@ -1,0 +1,18 @@
+/* 
+  Localizable.strings
+  iNSite
+
+  Created by Chris Karr on 8/6/16.
+  Copyright © 2016 iNSite AEC Hackathon Team. All rights reserved.
+*/
+
+"title_main_view_controller" = "inSite: %@";
+"title_filter_view_controller" = "Available Information";
+"title_site_info_view_controller" = "Site Details";
+"title_dialog_report_insite" = "Report new inSite";
+"label_insite_description" = "inSite Description";
+
+"button_action_camera" = "Add Picture";
+"button_action_video" = "Add Video";
+"button_action_audio" = "Add Audio";
+"button_action_send_insite" = "Send";

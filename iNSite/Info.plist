@@ -24,10 +24,9 @@
 	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
+		<string>location-services</string>
 		<string>armv7</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
@@ -43,5 +42,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>inSite uses your location to help orient you around construction and other work sites.</string>
+	<key>iNSite Sites URL</key>
+	<string>https://insite.audacious-software.com/maps/sites.json</string>
+	<key>iNSite Upload URL</key>
+	<string>https://insite.audacious-software.com/maps/upload.json</string>
 </dict>
 </plist>
